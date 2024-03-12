@@ -14,9 +14,11 @@ const App = () => {
             <Link style={{...style}} to="">Help</Link>
           </nav>
       </div>  
-      <div id='main' style={style}>
-        <h1 style={{...style, margin: '3rem'}}>Your favorite food, delivered while coding</h1>
+      <div id='main' style={{...style,  flexDirection: 'column', textAlign: 'center'}}>
+        <h1 style={{...style, marginTop: '5rem'}}>Your favorite food, delivered while coding</h1>
+        <nav>
           <Link style={{...style}} to='/pizza'>Pizza</Link>
+        </nav>
       </div>
     </BrowserRouter>
   );
