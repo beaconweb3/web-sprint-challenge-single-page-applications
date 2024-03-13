@@ -15,7 +15,7 @@ const App = () => {
           </nav>
       </div>  
       <div id='main' style={{...style,  flexDirection: 'column', textAlign: 'center'}}>
-        <h1 style={{...style, marginTop: '5rem'}}>Your favorite food, delivered while coding</h1>
+        <h1 style={{...style, border: '0', marginTop: '5rem'}}>Your favorite food, delivered while coding</h1>
         <nav>
           <Link style={{...style}} to='/pizza'>Pizza</Link>
         </nav>
