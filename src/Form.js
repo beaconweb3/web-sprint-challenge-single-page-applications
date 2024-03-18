@@ -8,17 +8,26 @@ import { Link } from 'react-router-dom'
 export function Form () {
 
     const barePizza = {
+        Name: '',
         Size: '',
         Sauce: '',
-        Toppings: '',
-        Crust: '',
-        Instructions: '',
+        Pepperoni: false,
+        Sausage: false,
+        CanadianBacon: false,
+        SpicyItalian: false,
+        Crust: false,
+        Instructions: 'Special Instructions Here',
         Quantity: '0'
     }
 
 
     const [ pizza, setPizza ] = useState({barePizza})
 
+    const onNameChange = evt => {
+        return (
+            setPizza({ ...pizza, Size: evt.target.value })
+        )
+    }
 
     const onSizeChange = evt => {
         return (
@@ -40,7 +49,7 @@ export function Form () {
 
     const onCrustChange = evt => {
         return (
-            setPizza({ ...pizza, Crust: evt.target.value })        
+            setPizza((prevState) => ({ ...prevState, Crust: !prevState.Crust }))        
         )
     } 
 
@@ -57,8 +66,10 @@ export function Form () {
     }
     
     const onSubmit = evt => {
+        evt.preventDefault();
+
         return (
-           console.log(evt.target.value)
+           console.log(pizza)
         )
     }
 
@@ -93,6 +104,14 @@ export function Form () {
         <div className="Form" style={{...style, margin: '4rem'}}>
             <div style={innerstyle}>
                 <h3>Build Your Own Pizza</h3>
+                <label htmlFor="nameInput">Name:</label>
+                    <input 
+                        type="text" 
+                        id="name-input" 
+                        onChange={onNameChange} 
+                        value={pizza.Name} 
+                        placeholder="Enter Your Name" 
+                        />
             </div>
             <div style={innerstyleG}>
                 <h4 style={{margin: '0'}}>Choose Your Size</h4>
@@ -158,52 +177,6 @@ export function Form () {
                         <input type="checkbox" name="toppings" value="Spicy Italian Sausage" />
                         Spicy Italian Sausage
                     </label>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Garlic Chicken" />
-                        Garlic Chicken
-                    </label>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Onions" />
-                        Onions
-                    </label>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Bell Pepper" />
-                        Bell Pepper
-                    </label>
-                </div>
-                <div style={{...innerstyle, alignItems: 'flex-start'}}>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Diced Tomatoes" />
-                        Diced Tomatoes
-                    </label>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Kalamata Olives" />
-                        Black Olives
-                    </label>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Roasted Garlic" />
-                        Roasted Garlic
-                    </label>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Artichoke Hearts" />
-                        Artichoke Hearts
-                    </label>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Feta Cheese" />
-                        Feta Cheese
-                    </label>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Pineapple" />
-                        Pineapple
-                    </label>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Spinach" />
-                        Spinach
-                    </label>
-                    <label>
-                        <input type="checkbox" name="toppings" value="Extra Cheese" />
-                        Extra Cheese
-                    </label>
                 </div>
             </section>
             <div style={innerstyleG}>
@@ -212,7 +185,7 @@ export function Form () {
             </div>
                 <section onChange={onCrustChange} style={{...innerstyle, alignItems: 'flex-start'}}>
                     <label>
-                        <input type="range" name="crust" min="0" max="1" value='0' />
+                        <input type="range" name="crust" min="0" max="1" value={pizza.Crust} />
                     </label>
                 </section>
             <div style={innerstyleG}>
@@ -220,12 +193,12 @@ export function Form () {
             </div>
                 <section onChange={onInstructionsChange} style={{...innerstyle, alignItems: 'flex-start'}}>
                     <label>
-                        <input  id='speal-text' type="text" name="name-input" value="Anything you'd like to Add" />
+                        <input  id='special-text' type="textarea" value={pizza.Instructions} />
                     </label>
                 </section>
                 <section onChange={onQuantityChange} style={{...innerstyle, borderBottom: '1rem',  alignItems: 'flex-start'}}>
                     <label>
-                        <input type="number" name="quantity" />
+                        <input type="number" name="quantity" value={pizza.Quantity}/>
                     </label>
                     <button id="order-button" type="submit">
                         Add to Order $FREE-99
