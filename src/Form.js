@@ -99,7 +99,7 @@ export function Form () {
                 <p style={{margin: '0', color: 'red'}}>*Required</p>
             </div>
             <div style={innerstyle}>
-                <select onChange={onSizeChange}>
+                <select id= 'size-dropdown' onChange={onSizeChange}>
                     <option value="">--Please Select--</option>
                     <option value="large">Large</option>
                     <option value="medium">Medium</option>
@@ -212,7 +212,7 @@ export function Form () {
             </div>
                 <section onChange={onCrustChange} style={{...innerstyle, alignItems: 'flex-start'}}>
                     <label>
-                        <input type="range" name="crust" min="0" max="1" value={setToppings.crust} />
+                        <input type="range" name="crust" min="0" max="1" value='0' />
                     </label>
                 </section>
             <div style={innerstyleG}>
@@ -220,7 +220,7 @@ export function Form () {
             </div>
                 <section onChange={onInstructionsChange} style={{...innerstyle, alignItems: 'flex-start'}}>
                     <label>
-                        <input type="textarea" name="instructions" value="Anything you'd like to Add" />
+                        <input  id='speal-text' type="text" name="name-input" value="Anything you'd like to Add" />
                     </label>
                 </section>
                 <section onChange={onQuantityChange} style={{...innerstyle, borderBottom: '1rem',  alignItems: 'flex-start'}}>
