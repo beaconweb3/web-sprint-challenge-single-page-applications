@@ -89,7 +89,7 @@ export function Form () {
     }
 
     return (
-      <form onSubmit={onSubmit} >  
+      <form id="pizza-form" onSubmit={onSubmit} >  
         <div className="Form" style={{...style, margin: '4rem'}}>
             <div style={innerstyle}>
                 <h3>Build Your Own Pizza</h3>
@@ -212,7 +212,7 @@ export function Form () {
             </div>
                 <section onChange={onCrustChange} style={{...innerstyle, alignItems: 'flex-start'}}>
                     <label>
-                        <input type="range" name="crust" min="0" max="1" value="0" />
+                        <input type="range" name="crust" min="0" max="1" value={setToppings.crust} />
                     </label>
                 </section>
             <div style={innerstyleG}>
