@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
+import { Form } from './Form'
 
 export const Home = () => {
 
@@ -13,7 +14,7 @@ export const Home = () => {
             <h1 style={{ ...style, border: '0' }}>Bloomtech Eats</h1>
             <nav id="navBar" style={{ ...style, border: '0' }}>
                 <Link style={{ ...style, marginRight: '10px' }} to="/">Home</Link>&nbsp;
-                <Link style={{ ...style }} to="/help">Help</Link>
+                <Link style={{ ...style }} to="/Help">Help</Link>
             </nav>
             </section>
             
@@ -27,30 +28,31 @@ export const Home = () => {
             <section id='Body' style={{ ...style, flexDirection: 'column', alignItems: 'flex-start', margin: '1rem', padding: '0 0.5rem', justifyContent: 'flex-start' }}>
                 <p style={{ textAlign: 'left' }}>Food Delivery in Gotham City</p>
                 <div id="images1" style={{ ...style, border: '0', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div>
-                    <img style={imgStyle} src="image1.jpg" alt="Image 1" />
-                    <p>something here</p>
-                </div>
-                <div>
-                    <img style={imgStyle} src="image1.jpg" alt="Image 1" />
-                    <p>something here</p>
-                </div>
-                <div>
-                    <img style={imgStyle} src="image1.jpg" alt="Image 1" />
-                    <p>something here</p>
-                </div>
-                </div>
-                <div style={{ width: '730px', height: '2px', backgroundColor: 'black' }}></div>
-                <div id="images2" style={{ ...style, border: '0', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div>
-                    <img style={imgStyle} src="image1.jpg" alt="Image 1" />
-                </div>
-                <div>
-                    <img style={imgStyle} src="image1.jpg" alt="Image 1" />
-                </div>
-                <div>
-                    <img style={imgStyle} src="image1.jpg" alt="Image 1" />
-                </div>
+                    <div>
+                        <img style={imgStyle} src="image1.jpg" alt="Image 1" />
+                        <p>something here</p>
+                    </div>
+                    <div>
+                        <img style={imgStyle} src="image1.jpg" alt="Image 1" />
+                        <p>something here</p>
+                    </div>
+                    <div>
+                        <img style={imgStyle} src="image1.jpg" alt="Image 1" />
+                        <p>something here</p>
+                    </div>
+                    </div>
+
+                    <div id="images2" style={{ ...style, border: '0', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div>
+                        <img style={imgStyle} src="image1.jpg" alt="Image 1" />
+                    </div>
+                    <div>
+                        <img style={imgStyle} src="image1.jpg" alt="Image 1" />
+                    </div>
+                    <div>
+                        <img style={imgStyle} src="image1.jpg" alt="Image 1" />
+                    </div>
+                    
                 </div>
             </section>
 
