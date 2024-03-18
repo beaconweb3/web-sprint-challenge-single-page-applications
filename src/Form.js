@@ -22,37 +22,37 @@ export function Form () {
 
     const onSizeChange = evt => {
         return (
-           console.log(evt.target.value)
+            setPizza({ ...pizza, Size: evt.target.value })        
         )
     }   
 
     const onSauceChange = evt => {
         return (
-           console.log(evt.target.value)
+            setPizza({ ...pizza, Sauce: evt.target.value })
         )
     } 
 
     const onToppingChange = evt => {
         return (
-           console.log(evt.target.value)
+           setPizza({ ...pizza, Topping: evt.target.value })
         )
     } 
 
     const onCrustChange = evt => {
         return (
-           console.log(evt.target.value)
+            setPizza({ ...pizza, Crust: evt.target.value })        
         )
     } 
 
     const onInstructionsChange = evt => {
         return (
-           console.log(evt.target.value)
+            setPizza({ ...pizza, Instructions: evt.target.value })        
         )
     } 
 
     const onQuantityChange = evt => {
         return (
-           console.log(evt.target.value)
+            setPizza({ ...pizza, Quantity: evt.target.value })        
         )
     }
     
@@ -227,7 +227,7 @@ export function Form () {
                     <label>
                         <input type="number" name="quantity" />
                     </label>
-                    <button type="submit">
+                    <button id="order-button" type="submit">
                         Add to Order $FREE-99
                     </button>
                 </section>                    

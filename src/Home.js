@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { Form } from './Form'
 
 export const Home = () => {
 
@@ -21,7 +20,7 @@ export const Home = () => {
             <section id='main' style={{ ...style, margin: '1rem', padding: '5rem 0', flexDirection: 'column', textAlign: 'center' }}>
                 <h1 style={{ ...style, border: '0', marginTop: '5rem' }}>Your favorite food, delivered while coding</h1>
                 <nav>
-                <Link style={{ ...style }} to='/pizza'>Pizza</Link>
+                <Link id="order-pizza" style={{ ...style }} to='/pizza'>Pizza</Link>
                 </nav>
             </section>
             
