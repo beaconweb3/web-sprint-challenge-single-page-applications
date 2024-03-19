@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom'
+import * as Yup from 'yup';
 
 
 
@@ -20,15 +20,27 @@ export function Form () {
         Quantity: '0'
     }
 
+    const errMsgs = {
+        name: '',
+        size: ''
+    }
+
+    // Define the Yup schema for form validation
+    const schema = Yup.object().shape({
+        Name: Yup.string().min(2, 'name must be at least 2 characters').required('Name is required'),
+        Size: Yup.string().required('Size is required'),
+        // Add other fields to validate here
+    });
 
     const [ pizza, setPizza ] = useState({barePizza})
+    const [ error, setErrors ] = useState({errMsgs})
 
     const onNameChange = evt => {
         return (
-            setPizza({ ...pizza, Size: evt.target.value })
+            setPizza({ ...pizza, Name: evt.target.value })
         )
     }
-
+    
     const onSizeChange = evt => {
         return (
             setPizza({ ...pizza, Size: evt.target.value })        
@@ -205,6 +217,17 @@ export function Form () {
                     </button>
                 </section>                    
         </div>
+
+        
+
       </form>
     )
 }
+
+
+const schema = Yup.object().shape({
+    name: Yup.string().min(2, 'Name must be at least 2 characters long').required('Name is required'),
+
+    });
+
+export default schema;
