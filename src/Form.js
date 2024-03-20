@@ -8,16 +8,16 @@ import * as yup from 'yup';
 export function Form () {
 
     const barePizza = {
-        Name: '',
-        Size: '',
-        Sauce: '',
-        Pepperoni: false,
-        Sausage: false,
-        CanadianBacon: false,
-        SpicyItalian: false,
-        Crust: false,
-        Instructions: 'Special Instructions Here',
-        Quantity: '0'
+        name: '',
+        size: '',
+        sauce: '',
+        pepperoni: false,
+        sausage: false,
+        canadianbacon: false,
+        spicyitalian: false,
+        crust: false,
+        instructions: 'Special Instructions Here',
+        quantity: '0'
     }
 
     const [pizza, setPizza ] = useState({barePizza})
@@ -26,10 +26,10 @@ export function Form () {
 
     // Define the Yup schema for form validation
     const schema = yup.object().shape({
-        Name: yup.string().min(2, 'name must be at least 2 characters'),
-        Size: yup.string().oneOf(['large' , 'medium', 'small']),
-        Sauce: yup.string().required('Sauce is required'),
-        Toppings: yup.string().min(1,'At lest one topping is required')
+        name: yup.string().min(2, 'name must be at least 2 characters'),
+        size: yup.string().oneOf(['large' , 'medium', 'small']),
+        sauce: yup.string().required('Sauce is required'),
+        toppings: yup.string().min(1,'At lest one topping is required')
     });
 
     useEffect(() => {
@@ -99,14 +99,14 @@ export function Form () {
         <div className="Form" style={{...style, margin: '4rem'}}>
             <div style={innerstyle}>
                 <h3>Build Your Own Pizza</h3>
-                <div>{errors.Name}</div>
+                <div>{errors.name}</div>
                 <label>Name:</label>
                     <input
-                        name="Name" 
+                        name="name" 
                         type="text" 
                         id="name-input" 
                         onChange={change} 
-                        value={pizza.Name} 
+                        value={pizza.name} 
                         placeholder="Enter Your Name" 
                         />
             </div>
@@ -114,43 +114,43 @@ export function Form () {
                 <h4 style={{margin: '0'}}>Choose Your Size</h4>
                 <p style={{margin: '0', color: 'red'}}>*Required</p>
             </div>
-            <div>{errors.Size}</div>
+            <div>{errors.size}</div>
             <div style={innerstyle}>
                 <select id= 'size-dropdown' onChange={change}>
-                    <option value="">--Please Select--</option>
-                    <option value="large">Large</option>
-                    <option value="medium">Medium</option>
-                    <option value="small">Small</option>
+                    <option name="size" value="">--Please Select--</option>
+                    <option name="size" value="large">Large</option>
+                    <option name="size" value="medium">Medium</option>
+                    <option name="size" value="small">Small</option>
                 </select>
             </div>
             <div style={innerstyleG}>
                 <h4 style={{margin: '0'}}>Choice of Sauce</h4>
                 <p style={{margin: '0', color: 'red'}}>*Required</p>
             </div>
-            <div>{errors.Sauce}</div>
+            <div>{errors.sauce}</div>
             <section onChange={change}>
                 <label>
-                    <input type="radio" name="Sauce" value="Original Red" />
+                    <input type="radio" name="sauce" value="Original Red" />
                     Original Red
                 </label>
                 <br />
                 <label>
-                    <input type="radio" name="Sauce" value="Garlic Ranch" />
+                    <input type="radio" name="sauce" value="Garlic Ranch" />
                     Garlic Rance
                 </label>
                 <br />
                 <label>
-                    <input type="radio" name="Sauce" value="BBQ Sauce" />
+                    <input type="radio" name="sauce" value="BBQ Sauce" />
                     BBQ Sauce
                 </label>
                 <br />
                 <label>
-                    <input type="radio" name="Sauce" value="Spinach Alfredo" />
+                    <input type="radio" name="sauce" value="Spinach Alfredo" />
                     Spinach Alfredo
                 </label>
                 <br />
                 <label>
-                    <input type="radio" name="Sauce" value="Pesto" />
+                    <input type="radio" name="sauce" value="Pesto" />
                     Pesto 
                 </label>
             </section>
@@ -161,19 +161,19 @@ export function Form () {
             <section onChange={change} style={{...innerstyle, flexDirection: 'row', }}>
                 <div style={{...innerstyle, alignItems: 'flex-start'}}>
                     <label>
-                        <input type="checkbox" name="Toppings" value="Pepperoni" />
+                        <input type="checkbox" name="toppings" value="Pepperoni" />
                         Pepperoni
                     </label>
                     <label>
-                        <input type="checkbox" name="Toppings" value="Sausage" />
+                        <input type="checkbox" name="toppings" value="Sausage" />
                         Sausage
                     </label>
                     <label>
-                        <input type="checkbox" name="Toppings" value="Canadian Bacon" />
+                        <input type="checkbox" name="toppings" value="Canadian Bacon" />
                         Canadian Bacon
                     </label>
                     <label>
-                        <input type="checkbox" name="Toppings" value="Spicy Italian Sausage" />
+                        <input type="checkbox" name="toppings" value="Spicy Italian Sausage" />
                         Spicy Italian Sausage
                     </label>
                 </div>
