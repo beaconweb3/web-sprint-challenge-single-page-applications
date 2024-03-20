@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import * as Yup from 'yup';
+import React, { useEffect, useState } from "react";
+import * as yup from 'yup';
 
 
 
@@ -20,63 +20,46 @@ export function Form () {
         Quantity: '0'
     }
 
-    const errMsgs = {
-        name: '',
-        size: ''
-    }
+    const [pizza, setPizza ] = useState({barePizza})
+    const [errors, setErrors ] = useState({})
+    const [disabled, setDisabled] = useState(true)
 
     // Define the Yup schema for form validation
-    const schema = Yup.object().shape({
-        Name: Yup.string().min(2, 'name must be at least 2 characters').required('Name is required'),
-        Size: Yup.string().required('Size is required'),
-        // Add other fields to validate here
+    const schema = yup.object().shape({
+        Name: yup.string().min(2, 'name must be at least 2 characters'),
+        Size: yup.string().oneOf(['large' , 'medium', 'small']),
+        Sauce: yup.string().required('Sauce is required'),
+        Toppings: yup.string().min(1,'At lest one topping is required')
     });
 
-    const [ pizza, setPizza ] = useState({barePizza})
-    const [ error, setErrors ] = useState({errMsgs})
+    useEffect(() => {
+        schema.isValid(pizza).then(valid => {
+           
+        })
+    }, [pizza])
 
-    const onNameChange = evt => {
-        return (
-            setPizza({ ...pizza, Name: evt.target.value })
-        )
+    const setFormErrors = (name, value) => {
+        yup.reach(schema, name).validate(value)
+            .then(() => setErrors({ ...errors, [name]: '' }))
+            .catch(err => {
+                setErrors({ ...errors, [name]: err.errors[0] })
+                
+    })}
+
+    const change = event => {
+        const { checked, value, name, type } = event.target
+        console.log(name)
+        const valueToUse = type === 'checkbox' ? checked : value
+        setFormErrors(name, valueToUse)
+        setPizza({ ...pizza, [name]: valueToUse })
     }
-    
-    const onSizeChange = evt => {
-        return (
-            setPizza({ ...pizza, Size: evt.target.value })        
-        )
-    }   
 
-    const onSauceChange = evt => {
-        return (
-            setPizza({ ...pizza, Sauce: evt.target.value })
-        )
-    } 
-
-    const onToppingChange = evt => {
-        return (
-           setPizza({ ...pizza, Topping: evt.target.value })
-        )
-    } 
-
-    const onCrustChange = evt => {
+    const onCrustChange = () => {
         return (
             setPizza((prevState) => ({ ...prevState, Crust: !prevState.Crust }))        
         )
     } 
-
-    const onInstructionsChange = evt => {
-        return (
-            setPizza({ ...pizza, Instructions: evt.target.value })        
-        )
-    } 
-
-    const onQuantityChange = evt => {
-        return (
-            setPizza({ ...pizza, Quantity: evt.target.value })        
-        )
-    }
-    
+  
     const onSubmit = evt => {
         evt.preventDefault();
 
@@ -116,11 +99,13 @@ export function Form () {
         <div className="Form" style={{...style, margin: '4rem'}}>
             <div style={innerstyle}>
                 <h3>Build Your Own Pizza</h3>
-                <label htmlFor="nameInput">Name:</label>
-                    <input 
+                <div>{errors.Name}</div>
+                <label>Name:</label>
+                    <input
+                        name="Name" 
                         type="text" 
                         id="name-input" 
-                        onChange={onNameChange} 
+                        onChange={change} 
                         value={pizza.Name} 
                         placeholder="Enter Your Name" 
                         />
@@ -129,8 +114,9 @@ export function Form () {
                 <h4 style={{margin: '0'}}>Choose Your Size</h4>
                 <p style={{margin: '0', color: 'red'}}>*Required</p>
             </div>
+            <div>{errors.Size}</div>
             <div style={innerstyle}>
-                <select id= 'size-dropdown' onChange={onSizeChange}>
+                <select id= 'size-dropdown' onChange={change}>
                     <option value="">--Please Select--</option>
                     <option value="large">Large</option>
                     <option value="medium">Medium</option>
@@ -141,29 +127,30 @@ export function Form () {
                 <h4 style={{margin: '0'}}>Choice of Sauce</h4>
                 <p style={{margin: '0', color: 'red'}}>*Required</p>
             </div>
-            <section onChange={onSauceChange}>
+            <div>{errors.Sauce}</div>
+            <section onChange={change}>
                 <label>
-                    <input type="radio" name="sauce" value="Original Red" />
+                    <input type="radio" name="Sauce" value="Original Red" />
                     Original Red
                 </label>
                 <br />
                 <label>
-                    <input type="radio" name="sauce" value="Garlic Ranch" />
+                    <input type="radio" name="Sauce" value="Garlic Ranch" />
                     Garlic Rance
                 </label>
                 <br />
                 <label>
-                    <input type="radio" name="sauce" value="BBQ Sauce" />
+                    <input type="radio" name="Sauce" value="BBQ Sauce" />
                     BBQ Sauce
                 </label>
                 <br />
                 <label>
-                    <input type="radio" name="sauce" value="Spinach Alfredo" />
+                    <input type="radio" name="Sauce" value="Spinach Alfredo" />
                     Spinach Alfredo
                 </label>
                 <br />
                 <label>
-                    <input type="radio" name="sauce" value="Pesto" />
+                    <input type="radio" name="Sauce" value="Pesto" />
                     Pesto 
                 </label>
             </section>
@@ -171,22 +158,22 @@ export function Form () {
                 <h4 style={{margin: '0'}}>Add Toppings</h4>
                 <p style={{margin: '0', color: 'red'}}>*Choose up to 10</p>
             </div>
-            <section onChange={onToppingChange} style={{...innerstyle, flexDirection: 'row', }}>
+            <section onChange={change} style={{...innerstyle, flexDirection: 'row', }}>
                 <div style={{...innerstyle, alignItems: 'flex-start'}}>
                     <label>
-                        <input type="checkbox" name="toppings" value="Pepperoni" />
+                        <input type="checkbox" name="Toppings" value="Pepperoni" />
                         Pepperoni
                     </label>
                     <label>
-                        <input type="checkbox" name="toppings" value="Sausage" />
+                        <input type="checkbox" name="Toppings" value="Sausage" />
                         Sausage
                     </label>
                     <label>
-                        <input type="checkbox" name="toppings" value="Canadian Bacon" />
+                        <input type="checkbox" name="Toppings" value="Canadian Bacon" />
                         Canadian Bacon
                     </label>
                     <label>
-                        <input type="checkbox" name="toppings" value="Spicy Italian Sausage" />
+                        <input type="checkbox" name="Toppings" value="Spicy Italian Sausage" />
                         Spicy Italian Sausage
                     </label>
                 </div>
@@ -203,12 +190,12 @@ export function Form () {
             <div style={innerstyleG}>
                 <h4 style={{margin: '0'}}>Special Instructions</h4>
             </div>
-                <section onChange={onInstructionsChange} style={{...innerstyle, alignItems: 'flex-start'}}>
+                <section onChange={change} style={{...innerstyle, alignItems: 'flex-start'}}>
                     <label>
                         <input  id='special-text' type="textarea" value={pizza.Instructions} />
                     </label>
                 </section>
-                <section onChange={onQuantityChange} style={{...innerstyle, borderBottom: '1rem',  alignItems: 'flex-start'}}>
+                <section onChange={change} style={{...innerstyle, borderBottom: '1rem',  alignItems: 'flex-start'}}>
                     <label>
                         <input type="number" name="quantity" value={pizza.Quantity}/>
                     </label>
@@ -223,11 +210,3 @@ export function Form () {
       </form>
     )
 }
-
-
-const schema = Yup.object().shape({
-    name: Yup.string().min(2, 'Name must be at least 2 characters long').required('Name is required'),
-
-    });
-
-export default schema;
